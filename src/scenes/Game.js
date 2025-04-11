@@ -9,6 +9,7 @@ export class Game extends Scene {
         this.ball = null;
         this.leftPaddle = null;
         this.rightPaddle = null;
+        this.ballInMotion = false;
     }
 
     
@@ -29,6 +30,14 @@ export class Game extends Scene {
     }
 
     update() {
+        this.input.keyboard.on('keydown-SPACE', this.startBall. this);
+    }
+
+    startBall() {
+            if (!this.ballInMotion) {
+                this.ball.setVelocity(((Math.random() * 200) - 200), ((Math.random() * 200) - 200));
+                this.ballInMotion = true;
+            }
     }
 
 }
