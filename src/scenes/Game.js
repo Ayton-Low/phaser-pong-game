@@ -23,7 +23,7 @@ export class Game extends Scene {
 
     create() {
         this.add.image(WIDTH/2, HEIGHT/2, 'background').setScale(0.8, 0.8);
-        this.ball = this.physics.add.image(WIDTH/2, HEIGHT/2, 'ball').setScale(0.1, 0.1).refreshBody();
+        this.ball = this.physics.add.image(WIDTH/2, HEIGHT/2, 'ball').setScale(0.05, 0.05).refreshBody();
         this.ball.setCollideWorldBounds(true);
         this.ball.setBounce(1, 1);
         this.leftPaddle = this.physics.add.image(50, 384, "paddle");
@@ -36,7 +36,7 @@ export class Game extends Scene {
         this.wasd = this.input.keyboard.addKeys(
             {
                 up: Phaser.Input.Keyboard.Keycodes.W,
-                down: Phaser.Input.Keyboard.Keycodes.S,
+                down: Phaser.Input.Keyboard.Keycodes.S
             }
         )
     }
@@ -53,7 +53,7 @@ export class Game extends Scene {
         } else if (this.cursors.down.isDown && this.rightPaddle.y < HEIGHT) {
             rightPaddle.y += 5;
         }
-    }
+    };
 
     startBall() {
             if (!this.ballInMotion) {
@@ -63,7 +63,7 @@ export class Game extends Scene {
                 this.ball.setVelocity(initialVelocityX, initialVelocityY);
                 this.ballInMotion = true;
             }
-    }
+    };
 
     hitPaddle() {
 
