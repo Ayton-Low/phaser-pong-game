@@ -2,7 +2,6 @@ import { Scene } from 'phaser';
 
 const WIDTH = 1024;
 const HEIGHT = 768;
-
 export class Game extends Scene {
     constructor() {
         super('Game');
@@ -12,6 +11,10 @@ export class Game extends Scene {
         this.ballInMotion = false;
         this.cursors = null;
         this.wasd = null;
+        this.leftScore = 0;
+        this.rightScore = 0;
+        this.leftScoreText = null;
+        this.rightScoreText = null;
     }
 
     
@@ -22,6 +25,8 @@ export class Game extends Scene {
     }
 
     create() {
+        this.leftScoreText = this.add.text(100, 50, '0', {fontSize: '50px'});
+        this.rightScoreText = this.add.text(924, 50, '0', {fontSize: '50px'});
         this.input.keyboard.on('keydown-SPACE', this.startBall, this);
         this.add.image(WIDTH/2, HEIGHT/2, 'background').setScale(0.8, 0.8);
         this.ball = this.physics.add.image(WIDTH/2, HEIGHT/2, 'ball').setScale(0.05, 0.05).refreshBody();
@@ -44,14 +49,25 @@ export class Game extends Scene {
 
     update() {
         if (this.wasd.up.isDown && this.leftPaddle.y > 0) {
-            leftPaddle.y -= 5;
+            this.leftPaddle.y -= 5;
         } else if (this.wasd.down.isDown && this.leftPaddle.y < HEIGHT) {
-            leftPaddle.y += 5;
+            this.leftPaddle.y += 5;
         }
         if (this.cursors.up.isDown && this.rightPaddle.y > 0) {
-            rightPaddle.y -= 5;
+            this.rightPaddle.y -= 5;
         } else if (this.cursors.down.isDown && this.rightPaddle.y < HEIGHT) {
-            rightPaddle.y += 5;
+            this.rightPaddle.y += 5;
+        }
+        const margin = 30;
+        if(this.ball.x < margin) {
+            this.rightScore += 1;
+            this.rightScoreText.setText(rightScore);
+            this.resetBall();
+
+        } else if (this.ball.x < (WIDTH - margin)) {
+            this.leftScore += 1;
+            this.leftScoreText.setText(leftScore);
+            this.resetBall();
         }
     };
 
@@ -67,6 +83,13 @@ export class Game extends Scene {
 
     hitPaddle() {
 
+    }
+
+    resetBall() {
+        this.ball.setPosition(WIDTH/2, 384);
+        this.ball.setVelocity(0, 0);
+        this.ballInMotion = false;
+        this.startBall();
     }
 
 }
