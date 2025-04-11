@@ -57,7 +57,7 @@ export class Game extends Scene {
 
     startBall() {
             if (!this.ballInMotion) {
-                this.ball.setVelocity(((Math.random() * 200) - 200), ((Math.random() * 200) - 200));
+                this.ball.setVelocity((Math.floor(Math.random() * 400) - 200), (Math.floor(Math.random() * 400) - 200));
                 this.ballInMotion = true;
             }
     }
