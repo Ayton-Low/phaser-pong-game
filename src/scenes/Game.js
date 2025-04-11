@@ -19,7 +19,7 @@ export class Game extends Scene {
     }
 
     create() {
-
+        this.add.image(WIDTH/2, HEIGHT/2, 'background')
     }
 
     update() {
