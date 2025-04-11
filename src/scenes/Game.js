@@ -22,6 +22,7 @@ export class Game extends Scene {
     }
 
     create() {
+        this.input.keyboard.on('keydown-SPACE', this.startBall, this);
         this.add.image(WIDTH/2, HEIGHT/2, 'background').setScale(0.8, 0.8);
         this.ball = this.physics.add.image(WIDTH/2, HEIGHT/2, 'ball').setScale(0.05, 0.05).refreshBody();
         this.ball.setCollideWorldBounds(true);
@@ -29,7 +30,7 @@ export class Game extends Scene {
         this.leftPaddle = this.physics.add.image(50, 384, "paddle");
         this.leftPaddle.setImmovable(true);
         this.rightPaddle = this.physics.add.image(974, 384, "paddle");
-        this.rightPaddlePaddle.setImmovable(true);
+        this.rightPaddle.setImmovable(true);
         this.physics.add.collider(this.ball, this.leftPaddle, this.hitPaddle, null, this);
         this.physics.add.collider(this.ball, this.rightPaddle, this.hitPaddle, null, this);
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -42,7 +43,6 @@ export class Game extends Scene {
     }
 
     update() {
-        this.input.keyboard.on('keydown-SPACE', this.startBall, this);
         if (this.wasd.up.isDown && this.leftPaddle.y > 0) {
             leftPaddle.y -= 5;
         } else if (this.wasd.down.isDown && this.leftPaddle.y < HEIGHT) {
