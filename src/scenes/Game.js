@@ -43,14 +43,14 @@ export class Game extends Scene {
 
     update() {
         this.input.keyboard.on('keydown-SPACE', this.startBall, this);
-        if (this.wasd.up.isDown && leftPaddle.y > 0) {
+        if (this.wasd.up.isDown && this.leftPaddle.y > 0) {
             leftPaddle.y -= 5;
-        } else if (this.wasd.down.isDown && leftPaddle.y < HEIGHT) {
+        } else if (this.wasd.down.isDown && this.leftPaddle.y < HEIGHT) {
             leftPaddle.y += 5;
         }
-        if (this.cursors.up.isDown && rightPaddle.y > 0) {
+        if (this.cursors.up.isDown && this.rightPaddle.y > 0) {
             rightPaddle.y -= 5;
-        } else if (this.cursors.down.isDown && rightPaddle.y < HEIGHT) {
+        } else if (this.cursors.down.isDown && this.rightPaddle.y < HEIGHT) {
             rightPaddle.y += 5;
         }
     }
