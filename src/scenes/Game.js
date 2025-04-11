@@ -61,12 +61,12 @@ export class Game extends Scene {
         const margin = 30;
         if(this.ball.x < margin) {
             this.rightScore += 1;
-            this.rightScoreText.setText(rightScore);
+            this.rightScoreText.setText(this.rightScore);
             this.resetBall();
 
-        } else if (this.ball.x < (WIDTH - margin)) {
+        } else if (this.ball.x > (WIDTH - margin)) {
             this.leftScore += 1;
-            this.leftScoreText.setText(leftScore);
+            this.leftScoreText.setText(this.leftScore);
             this.resetBall();
         }
     };
