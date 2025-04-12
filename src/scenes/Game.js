@@ -23,7 +23,7 @@ export class Game extends Scene {
         this.ball.setInteractive();
         this.ball.on("pointerdown", ()=>{
             this.health.x -= 10;
-            this.health.width -= 5;
+            this.health.width -= 10;
         })
     }
 
