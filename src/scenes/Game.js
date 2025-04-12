@@ -24,8 +24,8 @@ export class Game extends Scene {
         this.ball.setInteractive();
         this.ball.on("pointerdown", ()=>{
             this.health.width = this.health.width - 10;
-            this.health.y -= 5;
-            this.healthBar.y -= 5;
+            this.health.y += 5;
+            this.healthBar.y += 5;
             this.ballsize -= 0.05;
             this.ball.setScale(this.ballsize, this.ballsize);
         })
