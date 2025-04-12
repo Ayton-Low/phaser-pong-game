@@ -32,7 +32,7 @@ export class Game extends Scene {
     }
 
     update() {
-        if (!this.health.width) {
+        if ((this.health.width == 0)) {
             this.healthBar = null;
             this.health = null;
             this.ball = null;
