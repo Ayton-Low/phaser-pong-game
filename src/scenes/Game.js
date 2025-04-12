@@ -10,6 +10,7 @@ export class Game extends Scene {
         this.health = null;
         this.ballsize = 1;
         this.wasd = null;
+        this.healthNum = 20;
     }
 
     
@@ -18,7 +19,7 @@ export class Game extends Scene {
     }
 
     create() {
-        this.physics.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff").refreshBody();
+        this.ball = this.physics.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff").refreshBody()
         
         this.healthBar = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x222222");
         this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
@@ -29,6 +30,7 @@ export class Game extends Scene {
             this.healthBar.y += 5;
             this.ballsize -= 0.05;
             this.ball.setScale(this.ballsize, this.ballsize);
+            this.healthNum--;
         })
         this.wasd = this.input.keyboard.addKeys({
             up: Phaser.Input.Keyboard.KeyCodes.W,
@@ -39,7 +41,7 @@ export class Game extends Scene {
     }
 
     update() {
-        if ((this.health.width == 0)) {
+        if ((this.healthNum == 0)) {
             this.healthBar = null;
             this.health = null;
             this.ball = null;
