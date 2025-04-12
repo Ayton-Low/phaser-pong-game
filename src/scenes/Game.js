@@ -11,13 +11,14 @@ export class Game extends Scene {
 
     
     preload() {
-        this.load.image('healthBar', 'assets/HealthBar.png');
+
     }
 
     create() {
         this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
-        this.healthBar = this.add.image(WIDTH/2, HEIGHT/2 - 128, 'healthBar').setScale(2, 1);
-        this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 100, 8, "0x00ff00");
+        
+        this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x111111");
+        this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
     }
 
     update() {
