@@ -15,8 +15,8 @@ export class Game extends Scene {
     }
 
     create() {
-        this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 10, "0x0010ff");
-        this.healthBar = this.add.image(WIDTH/2, HEIGHT/2 + 15, 'healthBar');
+        this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
+        this.healthBar = this.add.image(WIDTH/2, HEIGHT/2 - 128, 'healthBar');
     }
 
     update() {
