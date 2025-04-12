@@ -44,20 +44,20 @@ export class Game extends Scene {
             this.health = null;
             this.ball = null;
         }
-        if(this.wasd.up.isDown){
+        if (this.wasd.up.isDown){
             this.ball.y -= 5;
             this.healthBar.y -= 5;
             this.health.y -= 5;
-        } else if(this.wasd.down.isDown){
+        } else if (this.wasd.down.isDown){
             this.ball.y += 5;
             this.healthBar.y += 5;
             this.health.y += 5;
         }
-        if(this.wasd.left.isDown){
+        if (this.wasd.left.isDown){
             this.ball.x -= 5;
             this.healthBar.x -= 5;
             this.health.x -= 5;
-        } else if(this.wasd.right.isDown){
+        } else if (this.wasd.right.isDown){
             this.ball.x += 5;
             this.healthBar.x += 5;
             this.health.x += 5;
