@@ -11,7 +11,7 @@ export class Game extends Scene {
 
     
     preload() {
-        this.load.image('healthBar', 'assets/pixil-frame-0.png');
+        this.load.image('healthBar', 'assets/HealthBar.png');
     }
 
     create() {
