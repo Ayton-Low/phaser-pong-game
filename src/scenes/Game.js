@@ -19,7 +19,7 @@ export class Game extends Scene {
     }
 
     create() {
-        this.ball = this.physics.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff").refreshBody()
+        this.ball = this.physics.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff").refreshBody();
         
         this.healthBar = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x222222");
         this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
