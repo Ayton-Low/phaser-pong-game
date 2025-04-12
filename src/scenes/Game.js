@@ -20,6 +20,11 @@ export class Game extends Scene {
         
         this.healthBar = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x111111");
         this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
+        this.ball.setInteractive();
+        this.ball.on("pointerdown", ()=>{
+            this.health.x -= 10;
+            this.health.width -= 5;
+        })
     }
 
     update() {
