@@ -46,7 +46,7 @@ export class Game extends Scene {
     }
 
     update() {
-        if ((this.healthNum > 1)) {
+        if ((this.healthNum < 1)) {
             this.healthBar.setVisible(false);
             this.health.setVisible(false);
             this.ball.setVisible(false);
