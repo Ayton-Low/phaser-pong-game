@@ -21,7 +21,7 @@ export class Game extends Scene {
 
     create() {
         this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
-        this.gameOverText = this.add.text(WIDTH/2, HEIGHT/2 - 25, 'Game Over!', {
+        this.gameOverText = this.add.text(WIDTH/2 - 25, HEIGHT/2, 'Game Over!', {
             fontSize: "50px",
             fill: "white"
         });
@@ -30,7 +30,7 @@ export class Game extends Scene {
         this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
         this.ball.setInteractive();
         this.ball.on("pointerdown", ()=>{
-            this.health.width = this.health.width - 10;
+            this.health.width = this.health.width - 9;
             this.health.y += 5;
             this.healthBar.y += 5;
             this.ballsize -= 0.05;
