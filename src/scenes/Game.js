@@ -11,6 +11,7 @@ export class Game extends Scene {
         this.ballsize = 1;
         this.wasd = null;
         this.healthNum = 20;
+        this.gameOverText = null;
     }
 
     
@@ -20,7 +21,11 @@ export class Game extends Scene {
 
     create() {
         this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
-        
+        this.gameOverText = this.add.text(WIDTH/2, HEIGHT/2, 'Game Over!', {
+            fontSize: "25px",
+            fill: "white"
+        });
+        this.gameOverText.setVisible(false);
         this.healthBar = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x222222");
         this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
         this.ball.setInteractive();
@@ -42,9 +47,10 @@ export class Game extends Scene {
 
     update() {
         if ((this.healthNum == 0)) {
-            this.healthBar = null;
-            this.health = null;
-            this.ball = null;
+            this.healthBar.setVisible(false);
+            this.health.setVisible(false);
+            this.ball.setVisible(false);
+            this.gameOverText.setVisible(true);
         }
         if (this.wasd.up.isDown){
             this.ball.y -= 5;
