@@ -61,11 +61,11 @@ export class Game extends Scene {
             this.healthBar.y += 5;
             this.health.y += 5;
         }
-        if (this.wasd.left.isDown){
+        if (this.wasd.left.isDown && this.ball.x > (this.ball.width)){
             this.ball.x -= 5;
             this.healthBar.x -= 5;
             this.health.x -= 5;
-        } else if (this.wasd.right.isDown){
+        } else if (this.wasd.right.isDown && this.ball.x < (HEIGHT - this.ball.width)){
             this.ball.x += 5;
             this.healthBar.x += 5;
             this.health.x += 5;
