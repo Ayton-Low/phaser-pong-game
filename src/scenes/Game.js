@@ -31,8 +31,8 @@ export class Game extends Scene {
         this.ball.setInteractive();
         this.ball.on("pointerdown", ()=>{
             this.health.width = this.health.width - 10;
-            this.health.y += 5;
-            this.healthBar.y += 5;
+            this.health.y += 2.5;
+            this.healthBar.y += 2.5;
             this.ballsize -= 0.025;
             this.ball.setScale(this.ballsize, this.ballsize);
             this.healthNum--;
@@ -52,11 +52,11 @@ export class Game extends Scene {
             this.ball.setVisible(false);
             this.gameOverText.setVisible(true);
         }
-        if (this.wasd.up.isDown){
+        if (this.wasd.up.isDown && this.ball.x > this.ballsize){
             this.ball.y -= 5;
             this.healthBar.y -= 5;
             this.health.y -= 5;
-        } else if (this.wasd.down.isDown){
+        } else if (this.wasd.down.isDown && this.ball.x < WIDTH - this.ballsize){
             this.ball.y += 5;
             this.healthBar.y += 5;
             this.health.y += 5;
