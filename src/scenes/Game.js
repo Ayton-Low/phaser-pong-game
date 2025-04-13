@@ -52,11 +52,11 @@ export class Game extends Scene {
             this.ball.setVisible(false);
             this.gameOverText.setVisible(true);
         }
-        if (this.wasd.up.isDown && this.ball.x > (this.ball.width)){
+        if (this.wasd.up.isDown && this.ball.y > (this.ball.width)){
             this.ball.y -= 5;
             this.healthBar.y -= 5;
             this.health.y -= 5;
-        } else if (this.wasd.down.isDown && this.ball.x < WIDTH - this.ball.width){
+        } else if (this.wasd.down.isDown && this.ball.y < WIDTH - this.ball.width){
             this.ball.y += 5;
             this.healthBar.y += 5;
             this.health.y += 5;
