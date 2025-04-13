@@ -3,6 +3,7 @@ import { Scene } from 'phaser';
 const WIDTH = 1024;
 const HEIGHT = 768;
 export class Game extends Scene {
+    graphics;
     constructor() {
         super('Game');
         this.ball = null;
