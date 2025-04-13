@@ -21,7 +21,7 @@ export class Game extends Scene {
 
     create() {
         this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
-        this.gameOverText = this.add.text((WIDTH/2 - 25), HEIGHT/2, 'Game Over!', {
+        this.gameOverText = this.add.text((WIDTH/2 - 100), HEIGHT/2, 'Game Over!', {
             fontSize: "50px",
             fill: "white"
         });
