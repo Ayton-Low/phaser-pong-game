@@ -35,6 +35,7 @@ export class Game extends Scene {
         this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 3) - 55, 210, 110, 30);
         
         this.graphics.fillStyle("0x00ff00");
+        this.add.text(WIDTH/2 - 300, 10, "Choose your difficulty", {fontSize: "50px"})
         this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
         this.add.text(WIDTH/2 - 50, HEIGHT/4 - 25, "Easy", {fontSize: "50px"});
         this.mediumButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
