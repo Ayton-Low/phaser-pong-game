@@ -29,6 +29,11 @@ export class Game extends Scene {
     create() {
         
         this.graphics = this.add.graphics();
+        this.graphics.fillStyle("0xffffff");
+        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 1) - 51, 202, 102, 30);
+        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 2) - 51, 202, 102, 30);
+        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 3) - 51, 202, 102, 30);
+        
         this.graphics.fillStyle("0x00ff00");
         this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
         
@@ -36,9 +41,6 @@ export class Game extends Scene {
         
         this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
         
-        this.graphics.fillStyle("0xffffff");
-
-        this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 250, 150, 30);
         this.easyButton;
     }
 
