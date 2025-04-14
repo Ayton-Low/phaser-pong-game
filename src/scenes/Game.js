@@ -30,9 +30,9 @@ export class Game extends Scene {
         
         this.graphics = this.add.graphics();
         this.graphics.fillStyle("0xffffff");
-        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 1) - 51, 202, 102, 30);
-        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 2) - 51, 202, 102, 30);
-        this.graphics.fillRoundedRect(WIDTH/2 - 101, (HEIGHT/4 * 3) - 51, 202, 102, 30);
+        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 1) - 55, 210, 110, 30);
+        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 2) - 55, 210, 110, 30);
+        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 3) - 55, 210, 110, 30);
         
         this.graphics.fillStyle("0x00ff00");
         this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
