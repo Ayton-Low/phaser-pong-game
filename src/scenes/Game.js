@@ -18,6 +18,7 @@ export class Game extends Scene {
         this.mediumBotton = null;
         this.hardButton = null;
         this.graphics = null;
+        this.gameStarted = false;
     }
 
     
@@ -28,17 +29,27 @@ export class Game extends Scene {
     create() {
         
         this.graphics = this.add.graphics();
-        this.graphics.fillStyle("0x00ff00"); // Set fill style (color, alpha)
-        this.graphics.fillRoundedRect(WIDTH/2, 100, 200, 100, 30); // x, y, width, height, cornerRadius
-        this.startGame();
+        this.graphics.fillStyle("0x00ff00");
+        this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
+        
+        this.mediumButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
+        
+        this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
+        
+        this.graphics.fillStyle("0xffffff");
+
+        this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 250, 150, 30);
+        this.easyButton;
     }
 
     update() {
+        if (this.gameStarted) {
         if ((this.healthNum < 1)) {
             this.healthBar.setVisible(false);
             this.health.setVisible(false);
             this.ball.setVisible(false);
             this.gameOverText.setVisible(true);
+            this.gameStarted = false;
         }
         if (this.wasd.up.isDown && this.ball.y > (this.ball.width)){
             this.ball.y -= this.ballSpeed;
@@ -58,8 +69,10 @@ export class Game extends Scene {
             this.healthBar.x += this.ballSpeed;
             this.health.x += this.ballSpeed;
         }
+    }
     };
     startGame() {
+        this.gameStarted = true;
         this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
         this.gameOverText = this.add.text((WIDTH/2 - 150), HEIGHT/2, 'Game Over!', {
             fontSize: "50px",
