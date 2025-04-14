@@ -43,7 +43,25 @@ export class Game extends Scene {
         this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
         
         this.add.text(WIDTH/2 - 50, (HEIGHT/4 * 3) - 25, "Hard", {fontSize: "50px"});
-        this.easyButton;
+        this.easyButton.setInteractive();
+        this.mediumButton.setInteractive();
+        this.hardButton.setInteractive();
+        this.easyButton.on("pointerdown", ()=>{
+            this.ballSpeed = 5;
+            this.damage = 5;
+            this.startGame();
+        });
+        this.mediumButton.on("pointerdown", ()=>{
+            this.ballSpeed = 10;
+            this.damage = 10;
+            this.startGame();
+        });
+        this.hardButton.on("pointerdown", ()=>{
+            this.ballSpeed = 20;
+            this.damage = 20;
+            this.startGame();
+        });
+
     }
 
     update() {
