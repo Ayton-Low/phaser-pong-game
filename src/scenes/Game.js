@@ -29,7 +29,7 @@ export class Game extends Scene {
         
         this.graphics = this.add.graphics();
         this.graphics.fillStyle("0x00ff00"); // Set fill style (color, alpha)
-        this.graphics.fillRoundedRect(300, 100, 200, 100, 30); // x, y, width, height, cornerRadius
+        this.graphics.fillRoundedRect(WIDTH/2, 100, 200, 100, 30); // x, y, width, height, cornerRadius
         this.startGame();
     }
 
