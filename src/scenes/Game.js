@@ -36,11 +36,12 @@ export class Game extends Scene {
         
         this.graphics.fillStyle("0x00ff00");
         this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
-        
+        this.add.text(WIDTH/2 - 50, HEIGHT/4 - 25, "Easy", {fontSize: "50px"});
         this.mediumButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
-        
+        this.add.text(WIDTH/2 - 80, (HEIGHT/4 * 2) - 25, "Medium", {fontSize: "50px"});
         this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
         
+        this.add.text(WIDTH/2 - 50, (HEIGHT/4 * 3) - 25, "Hard", {fontSize: "50px"});
         this.easyButton;
     }
 
