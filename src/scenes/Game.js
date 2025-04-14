@@ -3,7 +3,6 @@ import { Scene } from 'phaser';
 const WIDTH = 1024;
 const HEIGHT = 768;
 export class Game extends Scene {
-    graphics;
     constructor() {
         super('Game');
         this.ball = null;
@@ -18,6 +17,7 @@ export class Game extends Scene {
         this.easyButton = null;
         this.mediumBotton = null;
         this.hardButton = null;
+        this.graphics = null;
     }
 
     
@@ -30,6 +30,7 @@ export class Game extends Scene {
         this.graphics = this.add.graphics();
         this.graphics.fillStyle(0x00ff00); // Set fill style (color, alpha)
         this.graphics.fillRoundedRect(300, 100, 200, 100, 30); // x, y, width, height, cornerRadius
+        this.startGame();
     }
 
     update() {
@@ -43,7 +44,7 @@ export class Game extends Scene {
             this.ball.y -= this.ballSpeed;
             this.healthBar.y -= this.ballSpeed;
             this.health.y -= this.ballSpeed;
-        } else if (this.wasd.down.isDown && this.ball.y < WIDTH - this.ball.width){
+        } else if (this.wasd.down.isDown && this.ball.y < HEIGHT - this.ball.width){
             this.ball.y += this.ballSpeed;
             this.healthBar.y += this.ballSpeed;
             this.health.y += this.ballSpeed;
@@ -52,7 +53,7 @@ export class Game extends Scene {
             this.ball.x -= this.ballSpeed;
             this.healthBar.x -= this.ballSpeed;
             this.health.x -= this.ballSpeed;
-        } else if (this.wasd.right.isDown && this.ball.x < (HEIGHT - this.ball.width)){
+        } else if (this.wasd.right.isDown && this.ball.x < (WIDTH - this.ball.width)){
             this.ball.x += this.ballSpeed;
             this.healthBar.x += this.ballSpeed;
             this.health.x += this.ballSpeed;
