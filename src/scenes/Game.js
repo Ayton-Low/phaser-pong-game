@@ -59,6 +59,7 @@ export class Game extends Scene {
         this.hardButton.on("pointerdown", ()=>{
             this.ballSpeed = 20;
             this.damage = 20;
+            console.log("Yay");
             this.startGame();
         });
 
