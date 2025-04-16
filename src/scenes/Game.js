@@ -15,8 +15,11 @@ export class Game extends Scene {
         this.ballSpeed = 5;
         this.damage = 10;
         this.easyButton = null;
-        this.mediumBotton = null;
+        this.mediumButton = null;
         this.hardButton = null;
+        this.easyButtonCollider = null;
+        this.mediumButtonCollider = null;
+        this.hardButtonCollider = null;
         this.graphics = null;
         this.gameStarted = false;
     }
@@ -43,23 +46,26 @@ export class Game extends Scene {
         this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
         
         this.add.text(WIDTH/2 - 50, (HEIGHT/4 * 3) - 25, "Hard", {fontSize: "50px"});
-        this.easyButton.setInteractive();
-        this.mediumButton.setInteractive();
-        this.hardButton.setInteractive();
-        this.easyButton.on("pointerdown", ()=>{
+        this.fillStyle("0x000000", 0);
+        this.easyButtonCollider = this.add.rectangle(WIDTH/2 - 105, (HEIGHT/4 * 1) - 55, 210, 110, 30);
+        this.mediumButtonCollider = this.add.rectangle(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
+        this.hardButtonCollider = this.add.rectangle(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
+        this.easyButtonCollider.setInteractive();
+        this.mediumButtonCollider.setInteractive();
+        this.hardButtonCollider.setInteractive();
+        this.easyButtonCollider.on("pointerdown", ()=>{
             this.ballSpeed = 5;
             this.damage = 5;
             this.startGame();
         });
-        this.mediumButton.on("pointerdown", ()=>{
+        this.mediumButtonCollider.on("pointerdown", ()=>{
             this.ballSpeed = 10;
             this.damage = 10;
             this.startGame();
         });
-        this.hardButton.on("pointerdown", ()=>{
+        this.hardButtonCollider.on("pointerdown", ()=>{
             this.ballSpeed = 20;
             this.damage = 20;
-            console.log("Yay");
             this.startGame();
         });
 
