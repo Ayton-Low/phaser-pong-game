@@ -6,125 +6,90 @@ export class Game extends Scene {
     constructor() {
         super('Game');
         this.ball = null;
-        this.healthBar = null;
-        this.health = null;
-        this.ballsize = 1;
+        this.leftPaddle = null;
+        this.rightPaddle = null;
+        this.ballInMotion = false;
+        this.cursors = null;
         this.wasd = null;
-        this.healthNum = 20;
-        this.gameOverText = null;
-        this.ballSpeed = 5;
-        this.damage = 10;
-        this.easyButton = null;
-        this.mediumButton = null;
-        this.hardButton = null;
-        this.easyButtonCollider = null;
-        this.mediumButtonCollider = null;
-        this.hardButtonCollider = null;
-        this.graphics = null;
-        this.gameStarted = false;
+        this.leftScore = 0;
+        this.rightScore = 0;
+        this.leftScoreText = null;
+        this.rightScoreText = null;
     }
 
     
     preload() {
-
+        this.load.image('background', 'assets/background.png');
+        this.load.image('ball', 'assets/ball.png');
+        this.load.image('paddle', 'assets/paddle.png');
     }
 
     create() {
-        
-        this.graphics = this.add.graphics();
-        this.graphics.fillStyle("0xffffff");
-        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 1) - 55, 210, 110, 30);
-        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 2) - 55, 210, 110, 30);
-        this.graphics.fillRoundedRect(WIDTH/2 - 105, (HEIGHT/4 * 3) - 55, 210, 110, 30);
-        
-        this.graphics.fillStyle("0x00ff00");
-        this.add.text(WIDTH/2 - 300, 10, "Choose your difficulty", {fontSize: "50px"})
-        this.easyButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, HEIGHT/4 - 50, 200, 100, 30);
-        this.add.text(WIDTH/2 - 50, HEIGHT/4 - 25, "Easy", {fontSize: "50px"});
-        this.mediumButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
-        this.add.text(WIDTH/2 - 80, (HEIGHT/4 * 2) - 25, "Medium", {fontSize: "50px"});
-        this.hardButton = this.graphics.fillRoundedRect(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
-        
-        this.add.text(WIDTH/2 - 50, (HEIGHT/4 * 3) - 25, "Hard", {fontSize: "50px"});
-        this.fillStyle("0x000000", 0);
-        this.easyButtonCollider = this.add.rectangle(WIDTH/2 - 105, (HEIGHT/4 * 1) - 55, 210, 110, 30);
-        this.mediumButtonCollider = this.add.rectangle(WIDTH/2 - 100, (HEIGHT/4 * 2) - 50, 200, 100, 30);
-        this.hardButtonCollider = this.add.rectangle(WIDTH/2 - 100, (HEIGHT/4 * 3) - 50, 200, 100, 30);
-        this.easyButtonCollider.setInteractive();
-        this.mediumButtonCollider.setInteractive();
-        this.hardButtonCollider.setInteractive();
-        this.easyButtonCollider.on("pointerdown", ()=>{
-            this.ballSpeed = 5;
-            this.damage = 5;
-            this.startGame();
-        });
-        this.mediumButtonCollider.on("pointerdown", ()=>{
-            this.ballSpeed = 10;
-            this.damage = 10;
-            this.startGame();
-        });
-        this.hardButtonCollider.on("pointerdown", ()=>{
-            this.ballSpeed = 20;
-            this.damage = 20;
-            this.startGame();
-        });
-
+        this.leftScoreText = this.add.text(100, 50, '0', {fontSize: '50px'});
+        this.rightScoreText = this.add.text(924, 50, '0', {fontSize: '50px'});
+        this.input.keyboard.on('keydown-SPACE', this.startBall, this);
+        this.add.image(WIDTH/2, HEIGHT/2, 'background').setScale(0.8, 0.8);
+        this.ball = this.physics.add.image(WIDTH/2, HEIGHT/2, 'ball').setScale(0.05, 0.05).refreshBody();
+        this.ball.setCollideWorldBounds(true);
+        this.ball.setBounce(1, 1);
+        this.leftPaddle = this.physics.add.image(50, 384, "paddle");
+        this.leftPaddle.setImmovable(true);
+        this.rightPaddle = this.physics.add.image(974, 384, "paddle");
+        this.rightPaddle.setImmovable(true);
+        this.physics.add.collider(this.ball, this.leftPaddle, this.hitPaddle, null, this);
+        this.physics.add.collider(this.ball, this.rightPaddle, this.hitPaddle, null, this);
+        this.cursors = this.input.keyboard.createCursorKeys();
+        this.wasd = this.input.keyboard.addKeys(
+            {
+                up: Phaser.Input.Keyboard.Keycodes.W,
+                down: Phaser.Input.Keyboard.Keycodes.S
+            }
+        )
     }
 
     update() {
-        if (this.gameStarted) {
-        if ((this.healthNum < 1)) {
-            this.healthBar.setVisible(false);
-            this.health.setVisible(false);
-            this.ball.setVisible(false);
-            this.gameOverText.setVisible(true);
-            this.gameStarted = false;
+        if (this.wasd.up.isDown && this.leftPaddle.y > 0) {
+            this.leftPaddle.y -= 5;
+        } else if (this.wasd.down.isDown && this.leftPaddle.y < HEIGHT) {
+            this.leftPaddle.y += 5;
         }
-        if (this.wasd.up.isDown && this.ball.y > (this.ball.width)){
-            this.ball.y -= this.ballSpeed;
-            this.healthBar.y -= this.ballSpeed;
-            this.health.y -= this.ballSpeed;
-        } else if (this.wasd.down.isDown && this.ball.y < HEIGHT - this.ball.width){
-            this.ball.y += this.ballSpeed;
-            this.healthBar.y += this.ballSpeed;
-            this.health.y += this.ballSpeed;
+        if (this.cursors.up.isDown && this.rightPaddle.y > 0) {
+            this.rightPaddle.y -= 5;
+        } else if (this.cursors.down.isDown && this.rightPaddle.y < HEIGHT) {
+            this.rightPaddle.y += 5;
         }
-        if (this.wasd.left.isDown && this.ball.x > (this.ball.width)){
-            this.ball.x -= this.ballSpeed;
-            this.healthBar.x -= this.ballSpeed;
-            this.health.x -= this.ballSpeed;
-        } else if (this.wasd.right.isDown && this.ball.x < (WIDTH - this.ball.width)){
-            this.ball.x += this.ballSpeed;
-            this.healthBar.x += this.ballSpeed;
-            this.health.x += this.ballSpeed;
+        const margin = 30;
+        if(this.ball.x < margin) {
+            this.rightScore += 1;
+            this.rightScoreText.setText(this.rightScore);
+            this.resetBall();
+
+        } else if (this.ball.x > (WIDTH - margin)) {
+            this.leftScore += 1;
+            this.leftScoreText.setText(this.leftScore);
+            this.resetBall();
         }
-    }
     };
-    startGame() {
-        this.gameStarted = true;
-        this.ball = this.add.circle(WIDTH/2, HEIGHT/2, 100, "0x0010ff");
-        this.gameOverText = this.add.text((WIDTH/2 - 150), HEIGHT/2, 'Game Over!', {
-            fontSize: "50px",
-            fill: "white"
-        });
-        this.gameOverText.setVisible(false);
-        this.healthBar = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x222222");
-        this.health = this.add.rectangle(WIDTH/2, HEIGHT/2 - 128, 200, 8, "0x00ff00");
-        this.ball.setInteractive();
-        this.ball.on("pointerdown", ()=>{
-            this.health.width = this.health.width - this.damage;
-            this.health.y += 2.5;
-            this.healthBar.y += 2.5;
-            this.ballsize -= 0.025;
-            this.ball.setScale(this.ballsize, this.ballsize);
-            this.healthNum--;
-        })
-        this.wasd = this.input.keyboard.addKeys({
-            up: Phaser.Input.Keyboard.KeyCodes.W,
-            down: Phaser.Input.Keyboard.KeyCodes.S,
-            left: Phaser.Input.Keyboard.KeyCodes.A,
-            right: Phaser.Input.Keyboard.KeyCodes.D
-        });
+
+    startBall() {
+            if (!this.ballInMotion) {
+                
+                let initialVelocityX = 300 * (Phaser.Math.Between(0, 1) ? 1 : -1); 
+                let initialVelocityY = 300 * (Phaser.Math.Between(0, 1) ? 1 : -1); 
+                this.ball.setVelocity(initialVelocityX, initialVelocityY);
+                this.ballInMotion = true;
+            }
+    };
+
+    hitPaddle() {
+
+    }
+
+    resetBall() {
+        this.ball.setPosition(WIDTH/2, 384);
+        this.ball.setVelocity(0, 0);
+        this.ballInMotion = false;
+        this.startBall();
     }
 
 }
